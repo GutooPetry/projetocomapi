@@ -7,7 +7,7 @@ textColor="#ffffff"
 font="monospace"
 
 [server]
-enableCORS = False
-enableXsrfProtection = False
+enableCORS = false
+enableXsrfProtection = false
 
 
