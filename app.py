@@ -635,7 +635,8 @@ def secao_vendas():
 
                 # if st.form_submit_button('Finalizar Compra', on_click=abrir_link):
                     
-                if st.link_button('Finalizar Compra', gerar_link_pagamento()):
+                if st.form_submit_button('Finalizar Compra'):
+                    st.write(f'{gerar_link_pagamento}')
                     if verifica_status() == 'approved':
 
                         conn = conexao_db()
