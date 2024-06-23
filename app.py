@@ -84,7 +84,6 @@ def verifica_status():
     while True:
         search_request = sdk.payment().search(filters)
         resultados = search_request['response']['results']
-        print(search_request['response'])
         if len(resultados) == 0:
             continue
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
