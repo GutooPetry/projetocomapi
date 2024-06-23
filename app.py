@@ -711,7 +711,6 @@ def condicao_pagamento():
                 st.experimental_rerun()
     
         elif verifica_status() == 'rejected':
-            st.error('PAMENTO REPROVADO')
             condicao_pagamento()
 
     except KeyError:
