@@ -715,8 +715,8 @@ def condicao_pagamento():
             deleta_carrinho()
             st.experimental_rerun()
 
-    elif verifica_status() == 'rejected':
-        condicao_pagamento()
+        elif verifica_status() == 'rejected':
+            condicao_pagamento()
 
     except KeyError:
         st.error('Erro! O Carrinho está vazio.')
