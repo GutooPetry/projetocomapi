@@ -249,6 +249,7 @@ def cadastrar_produto():
                 cod_barras_up = st.text_input('Informe o Código de Barras do Produto:', placeholder='Código de Barras')
                 preco_up = st.number_input('Escolha um novo Preço para o produto:')
                 st.write('')
+                st.write('')
 
                 if st.form_submit_button('Atualizar Preço'):
                     if cod_barras_up != '' and preco_up > 0:
@@ -278,6 +279,7 @@ def cadastrar_produto():
                 cod_barras_up = st.text_input('Informe o Código de Barras do Produto:', placeholder='Código de Barras')
                 marca_up = st.text_input('Escolha uma Nova Marca:', placeholder='Nova Marca do Produto')
                 st.write('')
+                st.write('')
 
                 if st.form_submit_button('Atualizar Marca'):
                     if cod_barras_up != '' and marca_up != '':
@@ -306,6 +308,7 @@ def cadastrar_produto():
                 st.subheader('Preencha os Campos para Atualizar o Nome do Produto')
                 cod_barras_up = st.text_input('Informe o Código de Barras do Produto:', placeholder='Código de Barras')
                 nome_produto_up = st.text_input('Escolha um Novo Nome:', placeholder='Novo Nome do Produto')
+                st.write('')
                 st.write('')
 
                 if st.form_submit_button('Atualizar Nome'):
