@@ -374,6 +374,7 @@ def aplicar_promocoes():
             preco_promo = st.text_input('Preço Promocional', placeholder='Valor Promocional')
             data_inicio = data
             data_termino = st.date_input('Data FIM da Promoção:')
+            st.write('')
             botao_cad = st.form_submit_button('Aplicar')
 
             if botao_cad:
