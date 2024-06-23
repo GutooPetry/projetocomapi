@@ -708,9 +708,13 @@ def condicao_pagamento():
     
                 carrinho.clear()
                 deleta_carrinho()
+                i = 0
                 st.experimental_rerun()
     
         elif verifica_status() == 'rejected':
+            if i == 0:
+                st.error('Erro! O Pagamento Foi Reprovado')
+                i = 1
             condicao_pagamento()
 
     except KeyError:
@@ -868,4 +872,5 @@ def css_botao():
 
 # Chamada da função de login
 if __name__ == '__main__':
+    i = 0
     main()
