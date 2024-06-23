@@ -88,8 +88,6 @@ def verifica_status():
         if len(resultados) == 0:
             continue
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
-            print('Pagamento Aprovado')
-            print(search_request['response'])
             return 'approved'
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "rejected":
             return 'rejected'
