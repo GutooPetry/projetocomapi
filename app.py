@@ -656,6 +656,7 @@ def secao_vendas():
 
 
 def condicao_pagamento():
+    try:
         if verifica_status() == 'approved':
     
             conn = conexao_db()
