@@ -1,11 +1,11 @@
-# [theme]
-# base="dark"
-# primaryColor="#071898"
-# backgroundColor="#03032b"
-# secondaryBackgroundColor="#030343"
-# textColor="#ffffff"
-# font="monospace"
+[theme]
+base="dark"
+primaryColor="#071898"
+backgroundColor="#03032b"
+secondaryBackgroundColor="#030343"
+textColor="#ffffff"
+font="monospace"
 
-# [server]
-# enableCORS = false
-# enableXsrfProtection = false
+[server]
+enableCORS = false
+enableXsrfProtection = false
