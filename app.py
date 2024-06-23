@@ -28,7 +28,7 @@ def conn_sqlalchemy():
 def gerar_link_pagamento():
     conn = conexao_db()
     cursor = conn.cursor()
-    sql = 'SELECT external_reference FROM external_reference WHERE id = (SELECT MAX(id) FROM external_reference);'
+    sql = 'SELECT identificador FROM pagamentos WHERE id = (SELECT MAX(id) FROM pagamentos);'
     cursor.execute(sql)
     external_reference = cursor.fetchall()[0][0] + 1
 
