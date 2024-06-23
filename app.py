@@ -6,7 +6,6 @@ from sqlalchemy import create_engine, text
 import webbrowser
 import mercadopago
 data = datetime.now().strftime('%Y-%m-%d')
-i = 0
 
 def conexao_db():
     return mysql.connector.connect(
@@ -712,9 +711,6 @@ def condicao_pagamento():
                 st.experimental_rerun()
     
         elif verifica_status() == 'rejected':
-            if i == 0:
-                st.error('Erro! O Pagamento Foi Reprovado')
-                i = 1
             condicao_pagamento()
 
     except KeyError:
