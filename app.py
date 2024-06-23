@@ -631,75 +631,7 @@ def secao_vendas():
                     st.dataframe(tabela_carrinho, hide_index=True, use_container_width=True)
 
                 if st.form_submit_button('Finalizar Compra'):
-                    try:
-                        centralized_text = f"""
-                        <div style="display: flex; justify-content: center; align-items: center;">
-                            <p style="text-align: center; font-size: 20px;">
-                                <a href="{gerar_link_pagamento()}" target="_blank">Clique aqui para pagar</a>
-                            </p>
-                        </div>
-                        """
-                        st.markdown(centralized_text, unsafe_allow_html=True)
-                        if verifica_status() == 'approved':
-
-                            conn = conexao_db()
-                            cursor = conn.cursor()
-
-                            sql = 'SELECT * FROM carrinho;'
-                            cursor.execute(sql)
-                            if len(cursor.fetchall()) > 0:
-
-                                sql = 'SELECT SUM(valor_total) FROM carrinho'
-                                cursor.execute(sql)
-                                total_compra = cursor.fetchall()[0][0]
-
-                                sql = 'INSERT INTO vendas(data_venda, valor_venda) VALUES (%s, %s);'
-                                dados = (data, total_compra)
-                                cursor.execute(sql, dados)
-                                conn.commit()
-
-                                sql = 'SELECT MAX(id) FROM vendas;'
-                                cursor.execute(sql)
-                                venda_id = cursor.fetchall()[0][0]
-
-                                sql = 'SELECT cod_barras, quantidade FROM carrinho;'
-                                cursor.execute(sql)
-                                carrinho = cursor.fetchall()
-
-                                for item in carrinho:
-                                    cod_barras = item[0]
-                                    quantidade = item[1]
-
-                                    sql = "SELECT id FROM produtos WHERE cod_barras = %s;"
-                                    dados = (cod_barras,)
-                                    cursor.execute(sql, dados)
-                                    produto_id = cursor.fetchall()[0][0]
-
-                                    sql1 = 'UPDATE estoque SET qtd_estoque = qtd_estoque - %s WHERE cod_barras = %s;'
-                                    sql2 = 'UPDATE produtos SET numero_vendas = numero_vendas + %s WHERE cod_barras = %s;'
-                                    sql3 = ('INSERT INTO produtos_vendidos(produto_id, venda_id, cod_barras, qtd_vendida, '
-                                            'data_venda) VALUES (%s, %s, %s, %s, %s);')
-
-                                    dados1 = (quantidade, cod_barras)
-                                    dados2 = (quantidade, cod_barras)
-                                    dados3 = (produto_id, venda_id, cod_barras, quantidade, data)
-
-                                    cursor.execute(sql1, dados1)
-                                    cursor.execute(sql2, dados2)
-                                    cursor.execute(sql3, dados3)
-                                    conn.commit()
-
-                                carrinho.clear()
-                                deleta_carrinho()
-                                st.experimental_rerun()
-
-                        elif verifica_status() == 'rejected':
-                            st.error('PAMENTO REPROVADO')
-                            verifica_status()
-                            
-                    except KeyError:
-                        st.error('Erro! O Carrinho está vazio.')
-
+                   condicao_pagamento()
                 centralized_text = """
                                 <div style="display: flex; justify-content: center; align-items: center;">
                                     <p style="text-align: center; font-size: 20px;">
@@ -711,6 +643,77 @@ def secao_vendas():
                 if st.form_submit_button('Cancelar Compra'):
                     deleta_carrinho()
                     st.experimental_rerun()
+
+
+def condicao_pagamento():
+    try:
+        centralized_text = f"""
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <p style="text-align: center; font-size: 20px;">
+                <a href="{gerar_link_pagamento()}" target="_blank">Clique aqui para pagar</a>
+            </p>
+        </div>
+        """
+        st.markdown(centralized_text, unsafe_allow_html=True)
+        if verifica_status() == 'approved':
+    
+            conn = conexao_db()
+            cursor = conn.cursor()
+    
+            sql = 'SELECT * FROM carrinho;'
+            cursor.execute(sql)
+            if len(cursor.fetchall()) > 0:
+    
+                sql = 'SELECT SUM(valor_total) FROM carrinho'
+                cursor.execute(sql)
+                total_compra = cursor.fetchall()[0][0]
+    
+                sql = 'INSERT INTO vendas(data_venda, valor_venda) VALUES (%s, %s);'
+                dados = (data, total_compra)
+                cursor.execute(sql, dados)
+                conn.commit()
+    
+                sql = 'SELECT MAX(id) FROM vendas;'
+                cursor.execute(sql)
+                venda_id = cursor.fetchall()[0][0]
+    
+                sql = 'SELECT cod_barras, quantidade FROM carrinho;'
+                cursor.execute(sql)
+                carrinho = cursor.fetchall()
+    
+                for item in carrinho:
+                    cod_barras = item[0]
+                    quantidade = item[1]
+    
+                    sql = "SELECT id FROM produtos WHERE cod_barras = %s;"
+                    dados = (cod_barras,)
+                    cursor.execute(sql, dados)
+                    produto_id = cursor.fetchall()[0][0]
+    
+                    sql1 = 'UPDATE estoque SET qtd_estoque = qtd_estoque - %s WHERE cod_barras = %s;'
+                    sql2 = 'UPDATE produtos SET numero_vendas = numero_vendas + %s WHERE cod_barras = %s;'
+                    sql3 = ('INSERT INTO produtos_vendidos(produto_id, venda_id, cod_barras, qtd_vendida, '
+                            'data_venda) VALUES (%s, %s, %s, %s, %s);')
+    
+                    dados1 = (quantidade, cod_barras)
+                    dados2 = (quantidade, cod_barras)
+                    dados3 = (produto_id, venda_id, cod_barras, quantidade, data)
+    
+                    cursor.execute(sql1, dados1)
+                    cursor.execute(sql2, dados2)
+                    cursor.execute(sql3, dados3)
+                    conn.commit()
+    
+                carrinho.clear()
+                deleta_carrinho()
+                st.experimental_rerun()
+    
+        elif verifica_status() == 'rejected':
+            condicao_pagamento()
+            st.error('PAMENTO REPROVADO')
+            
+    except KeyError:
+        st.error('Erro! O Carrinho está vazio.')
 
 
 def main():
