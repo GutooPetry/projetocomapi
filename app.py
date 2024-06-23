@@ -668,58 +668,58 @@ def condicao_pagamento():
     # sql = 'SELECT * FROM carrinho;'
     # cursor.execute(sql)
     # if len(cursor.fetchall()) > 0:
-        try:
-            if verifica_status() == 'approved':
+    try:
+        if verifica_status() == 'approved':
 
-                sql = 'SELECT SUM(valor_total) FROM carrinho'
-                cursor.execute(sql)
-                total_compra = cursor.fetchall()[0][0]
-    
-                sql = 'INSERT INTO vendas(data_venda, valor_venda) VALUES (%s, %s);'
-                dados = (data, total_compra)
+            sql = 'SELECT SUM(valor_total) FROM carrinho'
+            cursor.execute(sql)
+            total_compra = cursor.fetchall()[0][0]
+
+            sql = 'INSERT INTO vendas(data_venda, valor_venda) VALUES (%s, %s);'
+            dados = (data, total_compra)
+            cursor.execute(sql, dados)
+            conn.commit()
+
+            sql = 'SELECT MAX(id) FROM vendas;'
+            cursor.execute(sql)
+            venda_id = cursor.fetchall()[0][0]
+
+            sql = 'SELECT cod_barras, quantidade FROM carrinho;'
+            cursor.execute(sql)
+            carrinho = cursor.fetchall()
+
+            for item in carrinho:
+                cod_barras = item[0]
+                quantidade = item[1]
+
+                sql = "SELECT id FROM produtos WHERE cod_barras = %s;"
+                dados = (cod_barras,)
                 cursor.execute(sql, dados)
+                produto_id = cursor.fetchall()[0][0]
+
+                sql1 = 'UPDATE estoque SET qtd_estoque = qtd_estoque - %s WHERE cod_barras = %s;'
+                sql2 = 'UPDATE produtos SET numero_vendas = numero_vendas + %s WHERE cod_barras = %s;'
+                sql3 = ('INSERT INTO produtos_vendidos(produto_id, venda_id, cod_barras, qtd_vendida, '
+                        'data_venda) VALUES (%s, %s, %s, %s, %s);')
+
+                dados1 = (quantidade, cod_barras)
+                dados2 = (quantidade, cod_barras)
+                dados3 = (produto_id, venda_id, cod_barras, quantidade, data)
+
+                cursor.execute(sql1, dados1)
+                cursor.execute(sql2, dados2)
+                cursor.execute(sql3, dados3)
                 conn.commit()
-    
-                sql = 'SELECT MAX(id) FROM vendas;'
-                cursor.execute(sql)
-                venda_id = cursor.fetchall()[0][0]
-    
-                sql = 'SELECT cod_barras, quantidade FROM carrinho;'
-                cursor.execute(sql)
-                carrinho = cursor.fetchall()
-    
-                for item in carrinho:
-                    cod_barras = item[0]
-                    quantidade = item[1]
-    
-                    sql = "SELECT id FROM produtos WHERE cod_barras = %s;"
-                    dados = (cod_barras,)
-                    cursor.execute(sql, dados)
-                    produto_id = cursor.fetchall()[0][0]
-    
-                    sql1 = 'UPDATE estoque SET qtd_estoque = qtd_estoque - %s WHERE cod_barras = %s;'
-                    sql2 = 'UPDATE produtos SET numero_vendas = numero_vendas + %s WHERE cod_barras = %s;'
-                    sql3 = ('INSERT INTO produtos_vendidos(produto_id, venda_id, cod_barras, qtd_vendida, '
-                            'data_venda) VALUES (%s, %s, %s, %s, %s);')
-    
-                    dados1 = (quantidade, cod_barras)
-                    dados2 = (quantidade, cod_barras)
-                    dados3 = (produto_id, venda_id, cod_barras, quantidade, data)
-    
-                    cursor.execute(sql1, dados1)
-                    cursor.execute(sql2, dados2)
-                    cursor.execute(sql3, dados3)
-                    conn.commit()
-    
-                carrinho.clear()
-                deleta_carrinho()
-                st.experimental_rerun()
-    
-        elif verifica_status() == 'rejected':
-            condicao_pagamento()
-    
-        except KeyError:
-            st.error('Erro! O Carrinho está vazio.')
+
+            carrinho.clear()
+            deleta_carrinho()
+            st.experimental_rerun()
+
+    elif verifica_status() == 'rejected':
+        condicao_pagamento()
+
+    except KeyError:
+        st.error('Erro! O Carrinho está vazio.')
 
 
 
