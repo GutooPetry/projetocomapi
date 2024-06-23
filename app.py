@@ -707,7 +707,6 @@ def condicao_pagamento():
     
                 carrinho.clear()
                 deleta_carrinho()
-                i = 0
                 st.experimental_rerun()
     
         elif verifica_status() == 'rejected':
