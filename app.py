@@ -631,7 +631,17 @@ def secao_vendas():
                     st.dataframe(tabela_carrinho, hide_index=True, use_container_width=True)
 
                 if st.form_submit_button('Finalizar Compra'):
+                    
+                    centralized_text = f"""
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <p style="text-align: center; font-size: 20px;">
+                            <a href="{gerar_link_pagamento()}" target="_blank">Clique aqui para pagar</a>
+                        </p>
+                    </div>
+                    """
+                    st.markdown(centralized_text, unsafe_allow_html=True)
                    condicao_pagamento()
+                   
                 centralized_text = """
                                 <div style="display: flex; justify-content: center; align-items: center;">
                                     <p style="text-align: center; font-size: 20px;">
@@ -646,15 +656,6 @@ def secao_vendas():
 
 
 def condicao_pagamento():
-    try:
-        centralized_text = f"""
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <p style="text-align: center; font-size: 20px;">
-                <a href="{gerar_link_pagamento()}" target="_blank">Clique aqui para pagar</a>
-            </p>
-        </div>
-        """
-        st.markdown(centralized_text, unsafe_allow_html=True)
         if verifica_status() == 'approved':
     
             conn = conexao_db()
@@ -709,9 +710,9 @@ def condicao_pagamento():
                 st.experimental_rerun()
     
         elif verifica_status() == 'rejected':
-            condicao_pagamento()
             st.error('PAMENTO REPROVADO')
-            
+            condicao_pagamento()
+
     except KeyError:
         st.error('Erro! O Carrinho está vazio.')
 
