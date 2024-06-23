@@ -640,7 +640,7 @@ def secao_vendas():
                     </div>
                     """
                     st.markdown(centralized_text, unsafe_allow_html=True)
-                   condicao_pagamento()
+                    condicao_pagamento()
                    
                 centralized_text = """
                                 <div style="display: flex; justify-content: center; align-items: center;">
