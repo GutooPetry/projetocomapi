@@ -24,43 +24,46 @@ def conn_sqlalchemy():
     )
 
 def gerar_link_pagamento():
-    conn = conexao_db()
-    cursor = conn.cursor()
-    sql = 'SELECT identificador FROM pagamentos WHERE id = (SELECT MAX(id) FROM pagamentos);'
-    cursor.execute(sql)
-    external_reference = int(cursor.fetchall()[0][0]) + 1
-
-    sdk = mercadopago.SDK("APP_USR-1356405083366950-062314-a000252bad0794b45780d02003e93d46-1871398086")
-
-    preference_data = {
-        'items': [
-
-        ],
-        "back_urls": {
-            "success": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
-            "failure": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
-            "pending": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
-        },
-        "auto_return": "all",
-        "external_reference": f'{external_reference}'
-    }
-
-    sql = 'SELECT id, nome_produto, quantidade, preco FROM carrinho;'
-    cursor.execute(sql)
-
-    for produto in cursor.fetchall():
-        preference_data['items'].append({"id": produto[0], "title": produto[1], "quantity": produto[2],
-                                         "currency_id": "BRL", "unit_price": float(produto[3])})
-
-    result = sdk.preference().create(preference_data)
-    payment = result["response"]
-    link_iniciar_pagamento = payment["init_point"]
-
-    sql = 'INSERT INTO pagamentos (data_inicio, identificador) VALUES (%s, %s);'
-    dados = (result['response']['date_created'], external_reference)
-    cursor.execute(sql, dados)
-    conn.commit()
-    return link_iniciar_pagamento
+    try:
+        conn = conexao_db()
+        cursor = conn.cursor()
+        sql = 'SELECT identificador FROM pagamentos WHERE id = (SELECT MAX(id) FROM pagamentos);'
+        cursor.execute(sql)
+        external_reference = int(cursor.fetchall()[0][0]) + 1
+    
+        sdk = mercadopago.SDK("APP_USR-1356405083366950-062314-a000252bad0794b45780d02003e93d46-1871398086")
+    
+        preference_data = {
+            'items': [
+    
+            ],
+            "back_urls": {
+                "success": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
+                "failure": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
+                "pending": "https://www.linkedin.com/in/gustavo-petry-64a8b7301",
+            },
+            "auto_return": "all",
+            "external_reference": f'{external_reference}'
+        }
+    
+        sql = 'SELECT id, nome_produto, quantidade, preco FROM carrinho;'
+        cursor.execute(sql)
+    
+        for produto in cursor.fetchall():
+            preference_data['items'].append({"id": produto[0], "title": produto[1], "quantity": produto[2],
+                                             "currency_id": "BRL", "unit_price": float(produto[3])})
+    
+        result = sdk.preference().create(preference_data)
+        payment = result["response"]
+        link_iniciar_pagamento = payment["init_point"]
+    
+        sql = 'INSERT INTO pagamentos (data_inicio, identificador) VALUES (%s, %s);'
+        dados = (result['response']['date_created'], external_reference)
+        cursor.execute(sql, dados)
+        conn.commit()
+        return link_iniciar_pagamento
+    except KeyError:
+        st.error('Erro! O Carrinho está Vazio')
 
 
 def verifica_status():
