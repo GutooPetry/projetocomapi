@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, text
 import webbrowser
 import mercadopago
 data = datetime.now().strftime('%Y-%m-%d')
-
+i = 0
 
 def conexao_db():
     return mysql.connector.connect(
@@ -872,5 +872,4 @@ def css_botao():
 
 # Chamada da função de login
 if __name__ == '__main__':
-    i = 0
     main()
