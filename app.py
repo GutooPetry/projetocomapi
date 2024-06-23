@@ -694,9 +694,8 @@ def secao_vendas():
                                 st.experimental_rerun()
 
                         elif verifica_status() == 'rejected':
-                            st.experimental_rerun()
-                            verifica_status()
                             st.error('PAMENTO REPROVADO')
+                            verifica_status()
                             
                     except KeyError:
                         st.error('Erro! O Carrinho está vazio.')
