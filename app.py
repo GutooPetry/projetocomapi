@@ -695,6 +695,7 @@ def secao_vendas():
 
                         elif verifica_status() == 'rejected':
                             st.experimental_rerun()
+                            verifica_status()
                             st.error('PAMENTO REPROVADO')
                             
                     except KeyError:
