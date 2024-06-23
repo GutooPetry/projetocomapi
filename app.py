@@ -694,13 +694,7 @@ def secao_vendas():
                                 st.experimental_rerun()
 
                         elif verifica_status() == 'rejected':
-                            centralized_text = """
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <p style="text-align: center; font-size: 20px;">
-                                        Clique em Finalizar para Gerar o Link de Pagamento</p>
-                                    </div>
-                                    """
-                            st.markdown(centralized_text, unsafe_allow_html=True)
+                            st.experimental_rerun()
                             st.error('PAMENTO REPROVADO')
                             
                     except KeyError:
