@@ -30,7 +30,7 @@ def gerar_link_pagamento():
     cursor = conn.cursor()
     sql = 'SELECT identificador FROM pagamentos WHERE id = (SELECT MAX(id) FROM pagamentos);'
     cursor.execute(sql)
-    external_reference = cursor.fetchall()[0][0] + 1
+    external_reference = int(cursor.fetchall()[0][0]) + 1
 
     sdk = mercadopago.SDK("APP_USR-1356405083366950-062314-a000252bad0794b45780d02003e93d46-1871398086")
 
