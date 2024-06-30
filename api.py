@@ -11,16 +11,18 @@ data = datetime.now().strftime('%Y-%m-%d')
 
 def conexao_db():
     return mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='Rexroth.23',
-        database='new_sistema_estoque'
+        host=st.secrets["db_host"],
+        port=st.secrets["db_port"],
+        user=st.secrets["db_user"],
+        password=st.secrets["db_password"],
+        database=st.secrets["database"]
     )
 
 
 def conn_sqlalchemy():
     return create_engine(
-        "mysql+mysqlconnector://root:Rexroth.23@localhost/new_sistema_estoque"
+        f"mysql+mysqlconnector://{st.secrets['db_user']}:{st.secrets['db_password']}"
+        f"@{st.secrets['db_host']}:{st.secrets['db_port']}/{st.secrets['database']}"
     )
 
 
