@@ -79,7 +79,7 @@ def consulta_pagamento():
         "criteria": "desc",
         "range": "date_created",
         "external_reference": f"{identificador}",
-        "begin_date": "NOW-2HOURS",
+        "begin_date": "NOW-5HOURS",
         "end_date": "NOW"
     }
 
