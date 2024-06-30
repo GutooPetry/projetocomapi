@@ -91,8 +91,6 @@ def consulta_pagamento():
     }
 
     while True:
-        sleep(5)
-        print('********************************* OUTRA CONSULTA **********************************')
         search_request = sdk.payment().search(filters)
         resultados = search_request['response']['results']
         print(search_request['response'])
@@ -717,6 +715,7 @@ def registra_status():
 
 
 def verifica_status():
+    sleep(2)
     conn = conexao_db()
     cursor = conn.cursor()
     sql = 'SELECT status FROM pagamentos WHERE id = (SELECT MAX(id) FROM pagamentos);'
