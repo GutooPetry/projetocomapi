@@ -71,6 +71,11 @@ def gerar_link_pagamento():
         st.error('Erro! O Carrinho está Vazio ❌')
 
 
+def criar_botao():
+    if consulta_pagamento() != 'rejected':
+        cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento')
+
+
 def consulta_pagamento():
     conn = conexao_db()
     cursor = conn.cursor()
@@ -79,9 +84,7 @@ def consulta_pagamento():
     identificador = cursor.fetchall()[0][0]
     sdk = mercadopago.SDK("TEST-6091877502706152-062313-26c59193cd69d48f61ed140114f7c596-1849541513")
 
-    if criar_botao:
-        cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento')
-    
+    criar_botao()
     
     filters = {
         "sort": "date_created",
@@ -104,8 +107,6 @@ def consulta_pagamento():
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
             return 'approved'
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "rejected":
-            criar_botao = False
-            print(criar_botao)
             return 'rejected'
 
 
