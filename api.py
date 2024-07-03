@@ -78,7 +78,8 @@ def consulta_pagamento():
     cursor.execute(sql)
     identificador = cursor.fetchall()[0][0]
     sdk = mercadopago.SDK("TEST-6091877502706152-062313-26c59193cd69d48f61ed140114f7c596-1849541513")
-
+    cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento {i}')
+    
     filters = {
         "sort": "date_created",
         "criteria": "desc",
@@ -87,13 +88,14 @@ def consulta_pagamento():
         "begin_date": "NOW-2HOURS",
         "end_date": "NOW"
     }
-    i = 0
+
     while True:
         search_request = sdk.payment().search(filters)
         resultados = search_request['response']['results']
         print(search_request['response'])
-        cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento {i}')
-        i += 1
+        
+        if cancelar_pagamento:
+            return
         if len(resultados) == 0:
             continue
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
