@@ -87,12 +87,13 @@ def consulta_pagamento():
         "begin_date": "NOW-2HOURS",
         "end_date": "NOW"
     }
-
+    i = 0
     while True:
         search_request = sdk.payment().search(filters)
         resultados = search_request['response']['results']
         print(search_request['response'])
-
+        cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento {i}')
+        i += 1
         if len(resultados) == 0:
             continue
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
