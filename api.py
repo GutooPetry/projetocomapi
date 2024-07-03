@@ -93,8 +93,6 @@ def consulta_pagamento():
         resultados = search_request['response']['results']
         print(search_request['response'])
 
-        if cancelar_pagamento:
-            return
         if len(resultados) == 0:
             continue
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "approved":
@@ -657,8 +655,6 @@ def secao_vendas():
                         </div>
                         """
                         st.markdown(hiperlink, unsafe_allow_html=True)
-
-                        cancelar_pagamento = st.form_submit_button('Cancelar Pagamento')
 
                         registra_status()
                         verifica_status()
