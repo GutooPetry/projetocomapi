@@ -78,7 +78,9 @@ def consulta_pagamento():
     cursor.execute(sql)
     identificador = cursor.fetchall()[0][0]
     sdk = mercadopago.SDK("TEST-6091877502706152-062313-26c59193cd69d48f61ed140114f7c596-1849541513")
-    cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento')
+    i = 0 
+    cancelar_pagamento = st.form_submit_button(f'Cancelar Pagamento', key=f'{i}')
+    i += 1
     
     filters = {
         "sort": "date_created",
