@@ -105,6 +105,7 @@ def consulta_pagamento():
             return 'approved'
         elif resultados[0]['external_reference'] == str(identificador) and resultados[0]['status'] == "rejected":
             criar_botao = False
+            print(criar_botao)
             return 'rejected'
 
 
