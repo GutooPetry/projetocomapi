@@ -717,6 +717,7 @@ def verifica_status():
     print(status)
 
     if status == 'approved':
+        st.success('Compra Finalizada ✅')
         debita_estoque()
     else:
         st.error('Erro! O Pagamento NÃO Aprovado ❌')
