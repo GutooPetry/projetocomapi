@@ -2,8 +2,8 @@ import streamlit as st
 from datetime import datetime
 from Css import Css
 from Paginas import Paginas
-from application.Database import Database
-from application.Functions import Functions
+from Database import Database
+from Functions import Functions
 
 data = datetime.now().strftime('%Y-%m-%d')
 db = Database()
