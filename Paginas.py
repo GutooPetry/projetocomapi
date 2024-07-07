@@ -1,8 +1,8 @@
 import streamlit as st
 import mysql.connector
 from datetime import datetime
-from application.Database import Database
-from application.Functions import Functions
+from Database import Database
+from Functions import Functions
 data = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 db = Database()
 fn = Functions()
