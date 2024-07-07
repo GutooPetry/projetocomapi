@@ -109,15 +109,24 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Preço'):
-                        if cod_barras != '' and novo_preco > 0:
-                            nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
-                            if nivel_acesso == 3:
-                                db.update_preco_produto(cod_barras, novo_preco)
-                                st.success(f'O Preço do Produto foi Atualizado para R${novo_preco} ✅')
+                        lista_produtos = []
+                        conn = conexao_db()
+                        cursor = conn.cursor()
+                        sql = 'SELECT cod_barras FROM produtos;'
+                        cursor.execute(sql)
+                        for item in cursor.fetchall():
+                            lista_produtos.append(item[0])
+                        
+                        if cod_barras in lista_produtos:
+                            if cod_barras != '' and novo_preco > 0:
+                                nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
+                                if nivel_acesso == 3:
+                                    db.update_preco_produto(cod_barras, novo_preco)
+                                    st.success(f'O Preço do Produto foi Atualizado para R${novo_preco} ✅')
+                                else:
+                                    st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
-                                st.error('Nível de Acesso não permitido para está ação ❌')
-                        else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
 
             with tab3:
                 with st.form('atualizar-marca', True):
@@ -128,15 +137,24 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Marca'):
-                        if cod_barras != '' and nova_marca != '':
-                            nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
-                            if nivel_acesso == 3:
-                                db.update_marca_produto(cod_barras, nova_marca)
-                                st.success(f'Marca do Produto Atualizada para {nova_marca} ✅')
+                        lista_produtos = []
+                        conn = conexao_db()
+                        cursor = conn.cursor()
+                        sql = 'SELECT cod_barras FROM produtos;'
+                        cursor.execute(sql)
+                        for item in cursor.fetchall():
+                            lista_produtos.append(item[0])
+                            
+                        if cod_barras in lista_produtos:  
+                            if cod_barras != '' and nova_marca != '':
+                                nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
+                                if nivel_acesso == 3:
+                                    db.update_marca_produto(cod_barras, nova_marca)
+                                    st.success(f'Marca do Produto Atualizada para {nova_marca} ✅')
+                                else:
+                                    st.error('Nível de Acesso não permitido para esta ação ❌')
                             else:
-                                st.error('Nível de Acesso não permitido para esta ação ❌')
-                        else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
 
             with tab4:
                 with st.form('atualizar-nome-produto'):
@@ -147,15 +165,25 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Nome'):
-                        if cod_barras != '' and novo_nome != '':
-                            nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
-                            if nivel_acesso == 3:
-                                db.update_nome_produto(cod_barras, novo_nome)
-                                st.success(f'Nome do Produto Atualizado para {novo_nome} ✅')
+                        lista_produtos = []
+                        conn = conexao_db()
+                        cursor = conn.cursor()
+                        sql = 'SELECT cod_barras FROM produtos;'
+                        cursor.execute(sql)
+                        for item in cursor.fetchall():
+                            lista_produtos.append(item[0])
+                        
+                        if cod_barras in lista_produtos: 
+                        
+                            if cod_barras != '' and novo_nome != '':
+                                nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
+                                if nivel_acesso == 3:
+                                    db.update_nome_produto(cod_barras, novo_nome)
+                                    st.success(f'Nome do Produto Atualizado para {novo_nome} ✅')
+                                else:
+                                    st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
-                                st.error('Nível de Acesso não permitido para está ação ❌')
-                        else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
 
     @staticmethod
     def entrada_produtos():
@@ -264,19 +292,28 @@ class Paginas:
                     novo_nome = st.text_input('Novo Nome de Usuário', placeholder='Escolha um novo Nome de Usuário')
 
                     if st.form_submit_button('Alterar Username'):
+                        lista_usuarios = []
+                        conn = conexao_db()
+                        cursor = conn.cursor()
+                        sql = 'SELECT cpf FROM usuarios;'
+                        cursor.execute(sql)
+                        for item in cursor.fetchall():
+                            lista_usuarios.append(item[0])
+                        
+                        if cpf in lista_usuarios:
 
-                        if cpf != '' and novo_nome != '':
-                            nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
-
-                            if nivel_acesso == 3:
-                                db.update_nome_usuario(cpf, novo_nome)
-                                st.success(f'Nome de Usuário Alterado para {novo_nome} ✅')
-
+                            if cpf != '' and novo_nome != '':
+                                nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
+    
+                                if nivel_acesso == 3:
+                                    db.update_nome_usuario(cpf, novo_nome)
+                                    st.success(f'Nome de Usuário Alterado para {novo_nome} ✅')
+    
+                                else:
+                                    st.error('Nível de Acesso não permitido para está ação ❌')
+    
                             else:
-                                st.error('Nível de Acesso não permitido para está ação ❌')
-
-                        else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
 
             with tab3:
                 with st.form('atualizar-senha-usuario', True):
@@ -289,20 +326,29 @@ class Paginas:
                                                    type='password')
 
                     if st.form_submit_button('Alterar Senha'):
-
-                        if cpf != '' and nova_senha != '' and confirma_senha != '':
-                            nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
-
-                            if nivel_acesso == 3:
-                                if nova_senha == confirma_senha:
-                                    db.update_senha_usuario(cpf, nova_senha)
-                                    st.success(f'Senha de Usuário Alterada com Sucesso ✅')
+                        lista_usuarios = []
+                        conn = conexao_db()
+                        cursor = conn.cursor()
+                        sql = 'SELECT cpf FROM usuarios;'
+                        cursor.execute(sql)
+                        for item in cursor.fetchall():
+                            lista_usuarios.append(item[0])
+                        
+                        if cpf in lista_usuarios: 
+    
+                            if cpf != '' and nova_senha != '' and confirma_senha != '':
+                                nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
+    
+                                if nivel_acesso == 3:
+                                    if nova_senha == confirma_senha:
+                                        db.update_senha_usuario(cpf, nova_senha)
+                                        st.success(f'Senha de Usuário Alterada com Sucesso ✅')
+                                    else:
+                                        st.error('Erro! Você informou 2 Senhas diferentes ❌')
                                 else:
-                                    st.error('Erro! Você informou 2 Senhas diferentes ❌')
+                                    st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
-                                st.error('Nível de Acesso não permitido para está ação ❌')
-                        else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
 
     @staticmethod
     def secao_vendas():
