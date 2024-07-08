@@ -119,7 +119,9 @@ class Paginas:
                                 else:
                                     st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
-                                st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                st.error('Erro! Preencha todos os dados do produto corretamente ❌')
+                        else:
+                            st.error('Erro! O Código informado, NÃO está cadastrado no Sistema ❌')
 
             with tab3:
                 with st.form('atualizar-marca', True):
@@ -141,6 +143,8 @@ class Paginas:
                                     st.error('Nível de Acesso não permitido para esta ação ❌')
                             else:
                                 st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        else:
+                            st.error('Erro! O Código informado, NÃO está cadastrado no Sistema ❌')
 
             with tab4:
                 with st.form('atualizar-nome-produto'):
@@ -163,6 +167,8 @@ class Paginas:
                                     st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
                                 st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        else:
+                            st.error('Erro! O Código informado, NÃO está cadastrado no Sistema ❌')
 
     @staticmethod
     def entrada_produtos():
