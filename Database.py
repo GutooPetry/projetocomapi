@@ -294,7 +294,6 @@ class Database:
     
         for user in cursor.fetchall():
             lista_cpf.append(user[0])
-            lista_cpf.append(user[1])
     
         return lista_cpf
 
