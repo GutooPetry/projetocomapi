@@ -200,7 +200,7 @@ class Paginas:
                 st.title("Seção para Aplicar Promoções")
                 st.subheader("preencha as Informações da Promoção")
                 cod_barras = st.text_input('Código de Barras:', placeholder='Cód. Barras')
-                preco_promo = st.text_input('Preço Promocional', placeholder='Valor Promocional')
+                preco_promo = st.number_input('Preço Promocional')
                 data_inicio = data
                 data_termino = st.date_input('Data FIM da Promoção:')
                 botao_cad = st.form_submit_button('Aplicar')
