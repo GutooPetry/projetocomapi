@@ -277,28 +277,20 @@ class Paginas:
                     novo_nome = st.text_input('Novo Nome de Usuário', placeholder='Escolha um novo Nome de Usuário')
 
                     if st.form_submit_button('Alterar Username'):
-                        lista_usuarios = []
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT cpf FROM usuarios;'
-                        cursor.execute(sql)
-                        for item in cursor.fetchall():
-                            lista_usuarios.append(item[0])
-                        
+                        lista_usuarios = db.select_lista_cpf()
                         if cpf in lista_usuarios:
-
                             if cpf != '' and novo_nome != '':
                                 nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
     
                                 if nivel_acesso == 3:
                                     db.update_nome_usuario(cpf, novo_nome)
                                     st.success(f'Nome de Usuário Alterado para {novo_nome} ✅')
-    
                                 else:
                                     st.error('Nível de Acesso não permitido para está ação ❌')
-    
                             else:
                                 st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        else:
+                            st.error('Erro! O CPF informado, NÃO está cadastrado no Sistema ❌')
 
             with tab3:
                 with st.form('atualizar-senha-usuario', True):
@@ -311,16 +303,8 @@ class Paginas:
                                                    type='password')
 
                     if st.form_submit_button('Alterar Senha'):
-                        lista_usuarios = []
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT cpf FROM usuarios;'
-                        cursor.execute(sql)
-                        for item in cursor.fetchall():
-                            lista_usuarios.append(item[0])
-                        
+                        lista_usuarios = db.select_lista_usuarios()
                         if cpf in lista_usuarios: 
-    
                             if cpf != '' and nova_senha != '' and confirma_senha != '':
                                 nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
     
@@ -334,6 +318,8 @@ class Paginas:
                                     st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
                                 st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        else:
+                            st.error('Erro! O CPF informado, NÃO está cadastrado no Sistema ❌')
 
     @staticmethod
     def secao_vendas():
