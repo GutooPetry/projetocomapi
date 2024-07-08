@@ -285,6 +285,8 @@ class Paginas:
                                 if nivel_acesso == 3:
                                     db.update_nome_usuario(cpf, novo_nome)
                                     st.success(f'Nome de Usuário Alterado para {novo_nome} ✅')
+                                    if st.session_state['username'] == db.select_nome_usuario(cpf):
+                                        st.session_state['username'] = novo_nome
                                 else:
                                     st.error('Nível de Acesso não permitido para está ação ❌')
                             else:
