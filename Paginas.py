@@ -109,14 +109,7 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Preço'):
-                        lista_produtos = []
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT cod_barras FROM produtos;'
-                        cursor.execute(sql)
-                        for item in cursor.fetchall():
-                            lista_produtos.append(item[0])
-                        
+                        lista_produtos = db.select_lista_produtos()
                         if cod_barras in lista_produtos:
                             if cod_barras != '' and novo_preco > 0:
                                 nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
@@ -137,14 +130,7 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Marca'):
-                        lista_produtos = []
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT cod_barras FROM produtos;'
-                        cursor.execute(sql)
-                        for item in cursor.fetchall():
-                            lista_produtos.append(item[0])
-                            
+                        lista_produtos = db.select_lista_produtos()
                         if cod_barras in lista_produtos:  
                             if cod_barras != '' and nova_marca != '':
                                 nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
@@ -165,14 +151,7 @@ class Paginas:
                     st.write('')
 
                     if st.form_submit_button('Atualizar Nome'):
-                        lista_produtos = []
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT cod_barras FROM produtos;'
-                        cursor.execute(sql)
-                        for item in cursor.fetchall():
-                            lista_produtos.append(item[0])
-                        
+                        lista_produtos = db.select_lista_produtos()
                         if cod_barras in lista_produtos: 
                         
                             if cod_barras != '' and novo_nome != '':
