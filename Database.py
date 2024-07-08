@@ -285,6 +285,19 @@ class Database:
 
         return lista_usuarios
 
+    def select_lista_cpf(self):
+        conn = self.conexao_db()
+        cursor = conn.cursor()
+        sql = 'SELECT cpf FROM usuarios;'
+        cursor.execute(sql)
+        lista_cpf = []
+    
+        for user in cursor.fetchall():
+            lista_cpf.append(user[0])
+            lista_cpf.append(user[1])
+    
+        return lista_cpf
+
     def insert_cadastro_usuario(self, nome, data_nascimento, cpf, nome_usuario, senha_usuario):
         conn = self.conexao_db()
         cursor = conn.cursor()
