@@ -124,9 +124,6 @@ class Css:
         .ezrtsby2 {
             background-color: #020111
         }
-        .eczjsme3 {
-            background-color: #020111
-        }
         .e1nzilvr1 {
             color: #020111
         }
