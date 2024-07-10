@@ -12,9 +12,13 @@
 ## Autores
 
 - [Gustavo Petry](https://github.com/GutooPetry)
-- [Link do Sistema](https://github.com/GutooPetry)
-  
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-petry-64a8b7301/)
 
+
+
+
+## 🔗 Links
+- [Link do Sistema](https://sistema-estoque-inteligente.streamlit.app/)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-petry-64a8b7301/)
 
 
