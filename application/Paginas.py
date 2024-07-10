@@ -410,7 +410,7 @@ class Paginas:
             ['REALIZAR VENDAS E APLICAR PROMOÇÕES', 'CADASTRO E ENTRADA DE PRODUTOS', 'CADASTRO DE USUÁRIOS'])
 
         with tab1:
-            st.video('venda_promocao.mp4', autoplay=True)
+            st.video('/application/venda_promocao.mp4', autoplay=True)
             st.write('* PARA REALIZAR UMA VENDA LEIA O CÓDIGO DE TODOS OS PRODUTOS (DISPONÍVEL EM >> RELATÓRIOS <<)'
                      ' E APÓS CLIQUE EM '
                      '">> GERAR LINK DE PAGAMENTO <<, CLIQUE NO LINK GERADO PARA REALIZAR O PAGAMENTO. '
