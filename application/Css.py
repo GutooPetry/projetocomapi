@@ -129,12 +129,12 @@ class Css:
             color: #dae6e6;
         }
         .st-bx, .st-b9, .st-bw, .e116k4er1, .st-bb, .st-by, .e116k4er3 {
-            background-color: #1a1a1d;
-            border-color: #041360;  
+            background-color:#020111
+            border-color:#020111
         }
         .st-di {
-            background-color:black;
-            border-color: black;
+            background-color:#020111
+            border-color:#020111
         }
         .eczjsme8 {
             background-color: #03091D;
