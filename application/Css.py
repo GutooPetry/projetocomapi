@@ -144,17 +144,7 @@ class Css:
             background-color:#020111
             border-color:#020111
         }
-        .st-di {
-            background-color:#020111
-            border-color:#020111
-        }
-        .eczjsme8 {
-            background-color: #03091D;
-        }
-        #number_input_4, #number_input_5 {
-            background-color: #1a1a1d;
-            border-color: #041360; 
-        }
+
         .e1f1d6gn4 p {
             text-align: center;
             font-size: 18px;
