@@ -121,9 +121,6 @@ class Css:
             width: 100%;
             padding: 12px;
         }
-                .ea3mdgi8 {
-            background-color: #020111
-        }
         .ezrtsby2 {
             background-color: #020111
         }
