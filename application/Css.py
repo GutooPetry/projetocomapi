@@ -128,7 +128,10 @@ class Css:
             background-color: #041360;
             color: #dae6e6;
         }
-
+        .st-bx, .st-b9, .st-bw, .e116k4er1, .st-bb, .st-by, .e116k4er3 {
+            background-color:#020111
+            border-color:#020111
+        }
         .st-di {
             background-color:#020111
             border-color:#020111
