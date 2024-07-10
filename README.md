@@ -5,7 +5,11 @@
 
 * Dentro do Sistema é possivel realizar o cadastro de produtos e novos usuários, registrar entrada de produtos no estoque, aplicar promoções com data de corte automática e realizar a venda de produtos, realizando uma simulação de pagamento, para que a compra somente seja finalizada, caso o pagamento for aprovado.
 
-* Visitantes que desejam ter acesso ao sistema podem utilizar o seguinte Login -> Username: visitante | Senha: sejabemvindo
+
+## Dados para Login
+* Visitantes que desejam ter acesso ao sistema podem utilizar o seguinte Login:
+* Nome de usuário: visitante
+* Senha: sejabemvindo
 
 
 
