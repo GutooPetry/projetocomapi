@@ -428,13 +428,13 @@ class Paginas:
             st.write('* CPF -> 12345678909')
 
         with tab2:
-            st.video('cadastro_entrada.mp4')
+            st.video('videos/cadastro_entrada.mp4')
             st.write('* PARA REALIZAR O CADASTRO DE PRODUTOS NO SISTEMA VÁ EM >> CADASTRAR PRODUTOS << E PREENCHA TODOS'
                      ' OS CAMPOS. ')
             st.write('* IMPORTANTE:\n * O PREÇO FORNECIDO NO CADASTRO SERÁ O VALOR COBRADO PELO PRODUTO NAS VENDAS, '
                      'DESDE QUE NÃO SEJA APLICADA UMA PROMOÇÃO.\n* SÓ PODE HAVER 1 CADASTRO PRA CADA CÓDIGO DE BARRAS.')
 
         with tab3:
-            st.video('cadastro_usuario.mp4')
+            st.video('videos/cadastro_usuario.mp4')
             st.write('* PARA REALIZAR O CADASTRO DE NOVOS USUÁRIOS NO SISTEMA, VÁ EM >> CADASTRAR USUÁRIOS << '
                      'E PREENCHA TODOS OS CAMPOS. OBS: SÓ PODE HAVER 1 CADASTRO PARA CADA CPF E USERNAME.')
