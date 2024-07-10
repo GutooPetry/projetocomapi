@@ -8,8 +8,8 @@
 
 ## Dados para Login
 * Visitantes que desejam ter acesso ao sistema podem utilizar o seguinte Login:
-* Nome de usuário: visitante
-* Senha: sejabemvindo
+* Nome de usuário ->  visitante
+* Senha ->  sejabemvindo
 
 
 
