@@ -121,6 +121,40 @@ class Css:
             width: 100%;
             padding: 12px;
         }
+                .ea3mdgi8 {
+            background-color: #020111
+        }
+        .ezrtsby2 {
+            background-color: #020111
+        }
+        .eczjsme3 {
+            background-color: #020111
+        }
+        .e1nzilvr1 {
+            color: #020111
+        }
+        #root :nth-child(1) {
+            color: white;
+        }
+        .st-emotion-cache-uko8fv .ef3psqc7 {
+            background-color: #041360;
+            color: #dae6e6;
+        }
+        .st-bx, .st-b9, .st-bw, .e116k4er1, .st-bb, .st-by, .e116k4er3 {
+            background-color:#020111
+            border-color:#020111
+        }
+        .st-di {
+            background-color:#020111
+            border-color:#020111
+        }
+        .eczjsme8 {
+            background-color: #03091D;
+        }
+        #number_input_4, #number_input_5 {
+            background-color: #1a1a1d;
+            border-color: #041360; 
+        }
         .e1f1d6gn4 p {
             text-align: center;
             font-size: 18px;
