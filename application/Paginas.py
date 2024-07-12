@@ -266,22 +266,21 @@ class Paginas:
                         nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
 
                         if nivel_acesso == 3:
-                            if len(cpf) < 15:
-                                if nome_usuario not in lista_usuarios and cpf not in lista_usuarios:
-                                    if senha_usuario == confirma_senha:
-                                        if nome != '' and cpf != '' and nome_usuario != '' and senha_usuario != '':
-                                            db.insert_cadastro_usuario(nome, data_nascimento, cpf, nome_usuario,
+                            
+                            if nome_usuario not in lista_usuarios and cpf not in lista_usuarios:
+                                if senha_usuario == confirma_senha:
+                                    if nome != '' and cpf != '' and nome_usuario != '' and senha_usuario != '':
+                                        db.insert_cadastro_usuario(nome, data_nascimento, cpf, nome_usuario,
                                                                        senha_usuario)
-                                            st.success('✅ Usuário Cadastrado com Sucesso ✅')
-                                        else:
-                                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                        st.success('✅ Usuário Cadastrado com Sucesso ✅')
                                     else:
-                                        st.error('❌ Erro! Você informou 2 senhas diferentes ❌')
+                                        st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
                                 else:
-                                    st.error('❌ Erro! Já existe um usuário com estes dados cadastrados! ❌')
-
+                                    st.error('❌ Erro! Você informou 2 senhas diferentes ❌')
                             else:
-                                st.error('Erro! Informe um CPF válido ❌')
+                                st.error('❌ Erro! Já existe um usuário com estes dados cadastrados! ❌')
+
+                        
                         else:
                             st.error('❌ Nível de acesso não permitido para esta ação! ❌')
 
