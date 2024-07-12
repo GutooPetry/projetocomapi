@@ -225,24 +225,24 @@ class Paginas:
             with tab4:
                 db.select_vendas_dia()
 
-            with tab5:
-                col1, col2, col3, col4 = st.columns([0.4, 0.1, 0.4, 0.1])
-                with col1:
-                    st.subheader('Selecione a Data da Venda que Deseja Consultar')
-                    seleciona_data = st.date_input('Data Venda:')
-                    buscar_vendas = st.button('Buscar')
-                    if buscar_vendas:
-                        db.select_vendas(seleciona_data)
-                with col2:
-                    st.write('')
-                with col3:
-                    st.subheader('Para Visualizar a Venda Completa informe o ID')
-                    venda_id = st.number_input('ID Venda:', min_value=1)
-                    acessar_venda = st.button('Acessar')
-                    if acessar_venda:
-                        db.select_produtos_venda(venda_id)
-                with col4:
-                    st.write('')
+            # with tab5:
+            #     col1, col2, col3, col4 = st.columns([0.4, 0.1, 0.4, 0.1])
+            #     with col1:
+            #         st.subheader('Selecione a Data da Venda que Deseja Consultar')
+            #         seleciona_data = st.date_input('Data Venda:')
+            #         buscar_vendas = st.button('Buscar')
+            #         if buscar_vendas:
+            #             db.select_vendas(seleciona_data)
+            #     with col2:
+            #         st.write('')
+            #     with col3:
+            #         st.subheader('Para Visualizar a Venda Completa informe o ID')
+            #         venda_id = st.number_input('ID Venda:', min_value=1)
+            #         acessar_venda = st.button('Acessar')
+            #         if acessar_venda:
+            #             db.select_produtos_venda(venda_id)
+            #     with col4:
+            #         st.write('')
 
     @staticmethod
     def cadastrar_usuario():
@@ -266,18 +266,22 @@ class Paginas:
                         nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
 
                         if nivel_acesso == 3:
-                            if nome_usuario not in lista_usuarios and cpf not in lista_usuarios:
-                                if senha_usuario == confirma_senha:
-                                    if nome != '' and cpf != '' and nome_usuario != '' and senha_usuario != '':
-                                        db.insert_cadastro_usuario(nome, data_nascimento, cpf, nome_usuario,
-                                                                   senha_usuario)
-                                        st.success('✅ Usuário Cadastrado com Sucesso ✅')
+                            if len(cpf) > 14:
+                                if nome_usuario not in lista_usuarios and cpf not in lista_usuarios:
+                                    if senha_usuario == confirma_senha:
+                                        if nome != '' and cpf != '' and nome_usuario != '' and senha_usuario != '':
+                                            db.insert_cadastro_usuario(nome, data_nascimento, cpf, nome_usuario,
+                                                                       senha_usuario)
+                                            st.success('✅ Usuário Cadastrado com Sucesso ✅')
+                                        else:
+                                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
                                     else:
-                                        st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                                        st.error('❌ Erro! Você informou 2 senhas diferentes ❌')
                                 else:
-                                    st.error('❌ Erro! Você informou 2 senhas diferentes ❌')
+                                    st.error('❌ Erro! Já existe um usuário com estes dados cadastrados! ❌')
+
                             else:
-                                st.error('❌ Erro! Já existe um usuário com estes dados cadastrados! ❌')
+                                st.error('Erro! Informe um CPF válido ❌')
                         else:
                             st.error('❌ Nível de acesso não permitido para esta ação! ❌')
 
