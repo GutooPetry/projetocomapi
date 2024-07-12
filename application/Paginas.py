@@ -266,7 +266,7 @@ class Paginas:
                         nivel_acesso = db.select_nivel_acesso(st.session_state['username'])
 
                         if nivel_acesso == 3:
-                            if len(cpf) > 14:
+                            if len(cpf) < 15:
                                 if nome_usuario not in lista_usuarios and cpf not in lista_usuarios:
                                     if senha_usuario == confirma_senha:
                                         if nome != '' and cpf != '' and nome_usuario != '' and senha_usuario != '':
