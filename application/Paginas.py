@@ -211,8 +211,8 @@ class Paginas:
         if st.session_state.form_to_show == 'relatorios':
             st.title("Seção para Análise de Relatórios")
             st.subheader("Navegue entre as abas para visualizar os diferentes tipos de relatórios")
-            tab1, tab2, tab3, tab4, tab5 = st.tabs(['Estoque Atual', '+ Mais Vendidos (30 Dias)',
-                                                    '+ Mais Vendidos (Geral)', 'Vendas (24hrs)', 'Consultar Vendas'])
+            tab1, tab2, tab3, tab4 = st.tabs(['Estoque Atual', '+ Mais Vendidos (30 Dias)',
+                                                    '+ Mais Vendidos (Geral)', 'Vendas (24hrs)'])
             with tab1:
                 db.select_estoque_atual()
 
